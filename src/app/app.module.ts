@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 
 import { FullCalendarModule } from 'primeng/fullcalendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [	
@@ -15,7 +17,9 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    BrowserAnimationsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

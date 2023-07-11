@@ -5,6 +5,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 
+import {MatCardModule} from '@angular/material/card';
+
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -24,7 +27,7 @@ export class CalendarComponent implements OnInit {
       defaulDate: new Date(),
       locale: esLocale,
       header:{
-        left: 'prev,next',
+        left: 'prev,today,next',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
