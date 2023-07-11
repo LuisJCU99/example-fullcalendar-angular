@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 
 import {MatCardModule} from '@angular/material/card';
+import listPlugin from '@fullcalendar/list';
 
 
 @Component({
@@ -21,15 +22,23 @@ export class CalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(new Date());
 
     this.options = {
-      plugins: [dayGridPlugin, timeGridPlugin,interactionPlugin],
+      plugins: [dayGridPlugin, timeGridPlugin,interactionPlugin, listPlugin],
       defaulDate: new Date(),
       locale: esLocale,
+      navLinks: true,
+      
+      navLinkDayClick: function(date) {
+        console.log('day', date);
+        alert(date);
+      },
+
       header:{
         left: 'prev,today,next',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        right: 'dayGridMonth,listWeek'
       },
       editable: false
     }
@@ -38,7 +47,7 @@ export class CalendarComponent implements OnInit {
       {
         title: "Evento 1",
         start: new Date(),
-        description: "Evento 1"
+        description: "Esta es la descripción"
       },
       {
         title: "Evento 2",
@@ -48,12 +57,10 @@ export class CalendarComponent implements OnInit {
       {
         title: "Evento 3",
         start: new Date(new Date().getTime() + (86400000 * 2) ),
-        end: new Date(new Date().getTime() + (86400000 * 3) ),
+        end: new Date(new Date().getTime() + (86400000 * 4) ),
         description: "Evento 3"
       },
     ]
-
-
   }
 
 }
