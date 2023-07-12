@@ -7,6 +7,8 @@ import esLocale from '@fullcalendar/core/locales/es';
 
 import { MatCardModule } from '@angular/material/card';
 import listPlugin from '@fullcalendar/list';
+import { EVENTS } from '../mock-events';
+
 
 
 @Component({
@@ -15,7 +17,7 @@ import listPlugin from '@fullcalendar/list';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-
+  
   public events: any[];
   public options: any;
 
@@ -42,29 +44,12 @@ export class CalendarComponent implements OnInit {
         center: 'title',
         right: 'dayGridMonth,listWeek'
       },
-      editable: false
-    }
-
-    // Mock de los eventos del calendario (fijo)
-    this.events = [
-      {
-        title: "Evento 1",
-        start: new Date(),
-        description: "Esta es la descripción",
-        backgroundColor: "black"
-      },
-      {
-        title: "Evento 2",
-        start: new Date(new Date().getTime() + 86400000),
-        description: "Evento 3"
-      },
-      {
-        title: "Evento 3",
-        start: new Date(new Date().getTime() + (86400000 * 2)),
-        end: new Date(new Date().getTime() + (86400000 * 4)),
-        description: "Evento 3"
-      },
-    ]
+      editable: false,
+      eventClick: function(info) {
+        alert('Event: ' + info.event.title);
+      }
+    },
+    this.events = EVENTS;
   }
 
 }
