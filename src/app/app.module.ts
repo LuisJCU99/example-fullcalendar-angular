@@ -8,6 +8,9 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [	
@@ -19,7 +22,9 @@ import { MatCardModule } from '@angular/material/card';
     AppRoutingModule,
     FullCalendarModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
