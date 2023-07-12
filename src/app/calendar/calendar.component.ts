@@ -4,8 +4,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
-
-import { MatCardModule } from '@angular/material/card';
 import listPlugin from '@fullcalendar/list';
 import { EVENTS } from '../mock-events';
 
@@ -17,7 +15,7 @@ import { EVENTS } from '../mock-events';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  
+
   public events: any[];
   public options: any;
 
@@ -44,12 +42,27 @@ export class CalendarComponent implements OnInit {
         center: 'title',
         right: 'dayGridMonth,listWeek'
       },
+
+      //Elementos del footer
+      footer: {
+        left: '',
+        center: '',
+        right: 'myCustomButton'
+      },
+      customButtons: {
+        myCustomButton: {
+          text: 'Añadir evento',
+          click: function () {
+            alert('clicked the custom button!');
+          }
+        }
+      },
       editable: false,
-      eventClick: function(info) {
+      eventClick: function (info) {
         alert('Event: ' + info.event.title);
-      }
+      },
     },
-    this.events = EVENTS;
+      this.events = EVENTS;
   }
 
 }

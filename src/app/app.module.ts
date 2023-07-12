@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [	
@@ -23,6 +25,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     FullCalendarModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatButtonModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
