@@ -6,6 +6,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import listPlugin from '@fullcalendar/list';
 import { EVENTS } from '../mock-events';
+import { AddEventCalendarDialogComponent } from '../components/dialogs/add-event-calendar-dialog/add-event-calendar-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -19,7 +21,8 @@ export class CalendarComponent implements OnInit {
   public events: any[];
   public options: any;
 
-  constructor() { }
+  constructor(    private dialog: MatDialog,
+    ) { }
 
   ngOnInit() {
 
@@ -44,25 +47,25 @@ export class CalendarComponent implements OnInit {
       },
 
       //Elementos del footer
-      footer: {
-        left: '',
-        center: '',
-        right: 'myCustomButton'
-      },
-      customButtons: {
-        myCustomButton: {
-          text: 'Añadir evento',
-          click: function () {
-            alert('clicked the custom button!');
-          }
-        }
-      },
+      // footer: {
+      //   left: '',
+      //   center: '',
+      //   right: ''
+      // },
+      
       editable: false,
       eventClick: function (info) {
         alert('Event: ' + info.event.title);
       },
     },
       this.events = EVENTS;
+  }
+  opendialog() {
+    const dialogRef = this.dialog.open(AddEventCalendarDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 }
