@@ -1,22 +1,22 @@
 <h3>Añadir un evento</h3>
-<form class="formwidth">
+<form [formGroup]="form" class="formwidth">
     <table class="fullwidth" cellspacing="0">
         <tr>
             <td>
                 <mat-form-field class="fullwidth">
-                    <input matInput [matDatepicker]="datepicker">
+                    <input matInput placeholder="Fecha" [matDatepicker]="datepicker" formControlName="start">
                     <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                     <mat-datepicker #datepicker></mat-datepicker>
                 </mat-form-field>
             </td>
             <td>
-                <input matInput type="time" id="appt" name="appt">
+                <input matInput type="time" id="appt" name="appt" formControlName="hour">
             </td>
         </tr>
         <tr>
             <td>
                 <mat-form-field class="fullwidth">
-                    <input matInput placeholder="Título" id="title" name="title">
+                    <input matInput placeholder="Título" id="title" name="title" formControlName="title">
                 </mat-form-field>
             </td>
         </tr>
@@ -24,13 +24,13 @@
             <td>
                 <mat-form-field class="fullwidth">
                     <textarea matInput placeholder="Descripción" id="description" name="description" style="width: 400px;
-                    height: 150px;"></textarea>
+                    height: 150px;" formControlName="description"></textarea>
                 </mat-form-field>
             </td>
         </tr>
     </table>
     <p>
-        <button type="submit" mat-raised-button color="primary">Submit</button>
+        <button (click)="submit()" mat-raised-button color="primary">Submit</button>
     </p>
 
 </form>

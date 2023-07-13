@@ -3,6 +3,6 @@ export interface EventCalendar {
     title: String;
     start: Date;
     description: String;
-    backgroundColor: String;
+    backgroundColor?: String;
 }
 
