@@ -8,6 +8,7 @@ import listPlugin from '@fullcalendar/list';
 import { EVENTS } from '../mock-events';
 import { AddEventCalendarDialogComponent } from '../components/dialogs/add-event-calendar-dialog/add-event-calendar-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MockServiceEventService } from '../services/mock-service-event.service';
 
 
 
@@ -21,8 +22,9 @@ export class CalendarComponent implements OnInit {
   public events: any[];
   public options: any;
 
-  constructor(    private dialog: MatDialog,
-    ) { }
+  constructor(private dialog: MatDialog,
+    private eventsCalendarService: MockServiceEventService
+  ) { }
 
   ngOnInit() {
 
@@ -52,7 +54,7 @@ export class CalendarComponent implements OnInit {
       //   center: '',
       //   right: ''
       // },
-      
+
       editable: false,
       eventClick: function (info) {
         alert('Event: ' + info.event.title);
@@ -64,7 +66,12 @@ export class CalendarComponent implements OnInit {
     const dialogRef = this.dialog.open(AddEventCalendarDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+     this.eventsCalendarService.getEventsCalendar().subscribe(arg => {
+      console.log(arg);
+     }
+      );
+     
+
     });
   }
 

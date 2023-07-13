@@ -34,12 +34,12 @@ export class AddEventCalendarDialogComponent implements OnInit {
     newDate.setMinutes(parseInt(minutes));
     newDate.setSeconds(0);
     newDate.setMilliseconds(0);
-    return newDate;
+    const stringNewDate = newDate.toLocaleString();
+    return stringNewDate;
   }
 
   private formToEventCalendarObject(){
     const dateWithTime = this.addTimeToDate(this.form.get('start').value, this.form.get('hour').value);
-
      this.eventCalendarForm = {
        start: dateWithTime,
        title: this.form.get('title').value,
