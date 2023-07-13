@@ -1,7 +1,7 @@
 <mat-card class="example-card">
     <mat-card-content>
         <div>
-            <p-fullCalendar [events]="events" [options]="options"></p-fullCalendar>
+            <p-fullCalendar *ngIf="options" [events]="events" [options]="options"></p-fullCalendar>
         </div>
     </mat-card-content>
     <mat-card-actions align="end">
