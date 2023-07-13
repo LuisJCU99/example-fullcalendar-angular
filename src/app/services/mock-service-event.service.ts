@@ -9,7 +9,7 @@ export class MockServiceEventService {
   public events: any[];
   constructor(private firestore: Firestore) { }
 
-  addEvent(event: EventCalendar){
+  addEventCalendar(event: EventCalendar){
     const placeRef = collection(this.firestore, 'events');
     return addDoc(placeRef, event);
   }
