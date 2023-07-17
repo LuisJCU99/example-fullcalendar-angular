@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ManageEventCalendarDialogComponent } from './components/dialogs/manage-event-calendar-dialog/manage-event-calendar-dialog.component';
 
 
 
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [	
     AppComponent,
     CalendarComponent,
-    AddEventCalendarDialogComponent
+    AddEventCalendarDialogComponent,
+    ManageEventCalendarDialogComponent
    ],
   imports: [
     BrowserModule,

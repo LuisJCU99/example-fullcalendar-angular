@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import esLocale from '@fullcalendar/core/locales/es';
 import listPlugin from '@fullcalendar/list';
-import { EVENTS } from '../mock-events';
-import { AddEventCalendarDialogComponent } from '../components/dialogs/add-event-calendar-dialog/add-event-calendar-dialog.component';
+import { EVENTS } from '../../mock-events';
+import { AddEventCalendarDialogComponent } from '../dialogs/add-event-calendar-dialog/add-event-calendar-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MockServiceEventService } from '../services/mock-service-event.service';
-import { EventCalendar } from '../interfaces/event';
-
+import { MockServiceEventService } from '../../services/mock-service-event.service';
+import { EventCalendar } from '../../interfaces/event';
+import { ManageEventCalendarDialogComponent } from '../dialogs/manage-event-calendar-dialog/manage-event-calendar-dialog.component';
 
 
 @Component({
@@ -40,16 +39,12 @@ export class CalendarComponent implements OnInit {
 
         //Se permiten acciones en cada uno de los días 
         navLinks: true,
-        navLinkDayClick: function (date) {
-          console.log('day', date);
-          alert(date);
-        },
-
+        eventClick: this.openManageEventCalendarDialog.bind(this),
         //Elementos del header
         header: {
           left: 'prev,today,next',
           center: 'title',
-          right: ''
+          right: 'dayGridMonth'
         },
 
         //Elementos del footer
@@ -60,21 +55,14 @@ export class CalendarComponent implements OnInit {
         // },
 
         editable: false,
-        eventClick: function (info) {
-          alert('Event: ' + info.event.title);
-        },
+        // eventClick: function (info) {
+        //   alert('Event: ' + info.event.title);
+        // },
       },
-        this.events = this.perfectEvents();
+        this.events = this.normalizedEvents();
     }
     );
 
-  }
-  opendialog() {
-    const dialogRef = this.dialog.open(AddEventCalendarDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
   }
 
   typescriptStringToDate(dateString: String | Date): Date {
@@ -85,16 +73,25 @@ export class CalendarComponent implements OnInit {
       const [hours, minutes, seconds] = timePart.split(":");
       const formattedDateString = `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
       const date = new Date(formattedDateString);
-      console.log('La fecha del dolor:');
-      console.log(date);
       return date;
     } return today;
   }
 
-  perfectEvents(): EventCalendar[]{
+  normalizedEvents(): EventCalendar[] {
     this.eventsCalendar.forEach(object => object.start = this.typescriptStringToDate(object.start));
     console.log(this.eventsCalendar);
     return this.eventsCalendar;
   }
 
+  openAddEventCalendarDialog() {
+    const dialogRef = this.dialog.open(AddEventCalendarDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+  openManageEventCalendarDialog(arg) {
+    const dialogRef = this.dialog.open(ManageEventCalendarDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }
