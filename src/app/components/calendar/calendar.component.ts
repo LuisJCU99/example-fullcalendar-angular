@@ -28,6 +28,9 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // CAMBIAR SERVICIO PARA QUE SEA BY ID
+    //this.eventsCalendarService.getEventByField('nada','11/7/2023, 17:19:00').subscribe(args => {console.log(args)});
+    
     this.eventsCalendarService.getEventsCalendar().subscribe(args => {
       this.eventsCalendar = args;
       //this.perfectEvents();
