@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, query, where, getDocs } from "@angular/fire/firestore";
+import { Firestore, collection, addDoc, collectionData, query, where, getDocs, doc, getDoc, deleteDoc, updateDoc } from "@angular/fire/firestore";
 import { EventCalendar } from '../interfaces/event';
 import { Observable } from 'rxjs';
 
@@ -20,24 +20,34 @@ export class MockServiceEventService {
 
   }
 
-  getEventByField(fieldName: string, value: string): Observable<EventCalendar | undefined> {
-    const placeRef = collection(this.firestore, 'events');
-    const q = query(placeRef, where('start', '==', value));
-
-    return new Observable<EventCalendar | undefined>((observer) => {
-      getDocs(q).then((querySnapshot) => {
-        if (querySnapshot.empty) {
-          observer.next(undefined); // No se encontraron coincidencias
-        } else {
-          const event = querySnapshot.docs[0].data() as EventCalendar;
-          observer.next(event); // Se encontró el elemento que coincide con el campo y valor
-        }
-        observer.complete();
-      }).catch((error) => {
-        observer.error(error);
-      });
+  getEventById(id: string): Observable<EventCalendar | undefined> {
+    const eventRef = doc(this.firestore, 'events', id);
+    return new Observable<EventCalendar | undefined>(observer => {
+      getDoc(eventRef)
+        .then((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const eventData = docSnapshot.data() as EventCalendar;
+            observer.next(eventData);
+          } else {
+            observer.next(undefined);
+          }
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+          observer.complete();
+        });
     });
   }
 
+  deleteEventCalendar(eventId: string){
+    const eventDocRef = doc(this.firestore, `events/${eventId}`);
+    return deleteDoc(eventDocRef);
 
+  }
+
+  updateEventCalendar(eventId: string, newData: Partial<EventCalendar>) {
+    const eventDocRef = doc(this.firestore, 'events', eventId);
+    return updateDoc(eventDocRef, newData);
+  }
 }

@@ -1,1 +1,53 @@
-<p>manage-event-calendar-dialog works!</p>
+
+<mat-card class="example-card">
+    <mat-card-header style="padding-top: 5%;">
+            <mat-card-title>    <h2>Gestionar Evento</h2> 
+            </mat-card-title>
+         
+    </mat-card-header>
+    <mat-card-content>
+
+        <mat-dialog-content>
+
+            <form [formGroup]="form" class="formwidth">
+                <table class="fullwidth" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="fullwidth">
+                                <input matInput placeholder="Fecha" [matDatepicker]="datepicker" formControlName="start">
+                                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #datepicker></mat-datepicker>
+                            </mat-form-field> 
+                        </td>
+                        <td>
+                             <input matInput type="time" id="appt" name="appt" formControlName="hour">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="fullwidth">
+                                <input matInput placeholder="Título" id="title" name="title" formControlName="title">
+                            </mat-form-field>
+                            <!-- <mat-form-field class="fullwidth">
+                                <input matInput placeholder="fecha" id="start" name="start" formControlName="start">
+                            </mat-form-field> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <mat-form-field class="fullwidth">
+                                <textarea matInput placeholder="Descripción" id="description" name="description" style="width: 400px;
+                                height: 150px;" formControlName="description"></textarea>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <button (click)="edit()" mat-raised-button color="primary">Editar</button>
+                    <button (click)="delete()" mat-raised-button color="warn" style="float: right;">Eliminar</button>
+                </p>
+            </form>
+        </mat-dialog-content>
+    </mat-card-content>
+ </mat-card>
+

@@ -28,9 +28,12 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // CAMBIAR SERVICIO PARA QUE SEA BY ID
-    //this.eventsCalendarService.getEventByField('nada','11/7/2023, 17:19:00').subscribe(args => {console.log(args)});
-    
+    this.initCalendar();
+  }
+
+  initCalendar(){
+        // CAMBIAR SERVICIO PARA QUE SEA BY ID
+    // this.eventsCalendarService.getEventById('XsGLZeY9PbTZ439LjQt9').subscribe(args => {console.log(args)});
     this.eventsCalendarService.getEventsCalendar().subscribe(args => {
       this.eventsCalendar = args;
       //this.perfectEvents();
@@ -42,7 +45,10 @@ export class CalendarComponent implements OnInit {
 
         //Se permiten acciones en cada uno de los días 
         navLinks: true,
-        eventClick: this.openManageEventCalendarDialog.bind(this),
+        eventClick:
+
+          this.openManageEventCalendarDialog.bind(this)
+        ,
         //Elementos del header
         header: {
           left: 'prev,today,next',
@@ -65,7 +71,6 @@ export class CalendarComponent implements OnInit {
         this.events = this.normalizedEvents();
     }
     );
-
   }
 
   typescriptStringToDate(dateString: String | Date): Date {
@@ -93,8 +98,21 @@ export class CalendarComponent implements OnInit {
     });
   }
   openManageEventCalendarDialog(arg) {
-    const dialogRef = this.dialog.open(ManageEventCalendarDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
+    //console.log(arg.event._def.publicId);
+    const eventCalendarId = arg.event._def.publicId;
+    this.eventsCalendarService.getEventById(eventCalendarId).subscribe(args => {
+      const eventSelected: EventCalendar = args;
+      const dialogRef = this.dialog.open(ManageEventCalendarDialogComponent, {
+        data: {
+          eventCalendarId,
+          eventSelected
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.initCalendar();
+      });
     });
+
+
   }
 }

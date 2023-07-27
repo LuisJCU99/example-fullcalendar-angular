@@ -1,0 +1,13 @@
+mat-card-header{
+    background: #1e2d8fe4;
+    padding: 5px;
+    color:white;
+  }
+  
+  mat-card-content{
+    padding: 10px;
+  }
+  
+  mat-card{
+    padding:0;
+  }

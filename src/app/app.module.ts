@@ -20,6 +20,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageEventCalendarDialogComponent } from './components/dialogs/manage-event-calendar-dialog/manage-event-calendar-dialog.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core'
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -45,10 +47,12 @@ import { ManageEventCalendarDialogComponent } from './components/dialogs/manage-
     MatInputModule,
     MatDatepickerModule,
     FormsModule, ReactiveFormsModule,
+    MatIconModule,
+    
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore())
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'es-ES'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventCalendar } from './../../../interfaces/event';
 import { MockServiceEventService } from 'src/app/services/mock-service-event.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 
 
 @Component({
@@ -14,7 +16,8 @@ export class AddEventCalendarDialogComponent implements OnInit {
   eventCalendarForm: EventCalendar;
 
   constructor(private readonly fb: FormBuilder,
-              private eventsCalendarService: MockServiceEventService
+              private eventsCalendarService: MockServiceEventService,
+              public dialogRef: MatDialogRef<AddEventCalendarDialogComponent>
     ) {
     this.form = this.fb.group({
       start: this.fb.control('', [Validators.required]),
@@ -52,6 +55,8 @@ export class AddEventCalendarDialogComponent implements OnInit {
     console.log(this.eventCalendarForm);
     const response = await this.eventsCalendarService.addEventCalendar(this.eventCalendarForm);
     console.log(response);
+    this.dialogRef.close();
+
   }
 
 }
