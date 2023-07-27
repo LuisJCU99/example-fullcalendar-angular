@@ -27,7 +27,7 @@
     "@fullcalendar/list": "^4.4.2",
     "@fullcalendar/multimonth": "^6.1.8",
     "@fullcalendar/timegrid": "^4.4.2",
-    "firebase": "^10.0.0",
+    "firebase": "^10.1.0",
     "firebase-tools": "^12.4.3",
     "primeicons": "^4.1.0",
     "primeng": "^12.1.0-rc.1",
